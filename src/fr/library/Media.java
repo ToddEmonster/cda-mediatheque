@@ -1,11 +1,12 @@
 package fr.library;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Media {
     protected String title;
     protected String author;
-    protected List<Integer> notes;
+    protected List<Integer> notes = new ArrayList<>();
 
     public Media(String title, String author) {
         this.title = title;
