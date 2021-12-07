@@ -1,9 +1,11 @@
+package fr.library;
+
 import java.util.List;
 
 public class Media {
-    private String title;
-    private String author;
-    private List<Integer> notes;
+    protected String title;
+    protected String author;
+    protected List<Integer> notes;
 
     public Media(String title, String author) {
         this.title = title;
