@@ -9,6 +9,9 @@ import java.util.stream.Stream;
 public class Library {
     private ArrayList<Media> medias = new ArrayList<Media>();
 
+    public Library() {
+    }
+
     public Library(ArrayList<Media> medias) {
         this.medias = medias;
     }
@@ -17,21 +20,35 @@ public class Library {
         return medias;
     }
 
-    private void add(Media m) {
+    public void add(Media m) {
         this.medias.add(m);
     }
 
-    private ArrayList<Media> filter(String criterion, String value) throws ClassNotFoundException {
-        List filteredMedia;
+    public void addMultiple(Media[] medias) {
+        Stream.of(medias)
+                .forEach(m -> this.medias.add(m));
+    }
+
+    public ArrayList<Media> filter(String criterion, String value) {
+        ArrayList filteredMedia;
+        System.out.println("Résultats de la recherche \"" + criterion + " = " + value + "\" :");
         switch(criterion) {
+            case("auteur"):
+            case("auteure"):
+            case("autrice"):
             case("author"):
-                filteredMedia = this.filterMediaOn(m -> value == ((Media) m).getAuthor());
+                filteredMedia = this.filterMediaOn(m -> ((Media) m)
+                        .getAuthor().toLowerCase()
+                        .contains(value.toLowerCase()));
                 break;
-            default:
+            case("titre"):
             case("title"):
-                filteredMedia = this.filterMediaOn(m -> value == ((Media) m).getTitle());
+            default:
+                filteredMedia = this.filterMediaOn(m -> ((Media) m)
+                        .getTitle().toLowerCase()
+                        .contains(value.toLowerCase()));
                 break;
-            case("mediaType"):
+            case("type"):
                 switch (value.toLowerCase()) {
                     case("dvd"):
                         filteredMedia = this.filterMediaOn(Dvd.class::isInstance);
@@ -47,13 +64,13 @@ public class Library {
                 }
                 break;
         }
-        return new ArrayList<Media>(filteredMedia);
+        return filteredMedia;
     }
 
-    private List filterMediaOn(Predicate predicate) {
-        return (List) this.medias
+    private ArrayList filterMediaOn(Predicate predicate) {
+        return (ArrayList) this.medias
                 .stream()
                 .filter(predicate)
-                .collect(Collectors.toList());
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 }
