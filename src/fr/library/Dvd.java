@@ -5,12 +5,12 @@ import java.util.List;
 public class Dvd extends Media {
     private int zone;
 
-    public Dvd(String title, String author) {
-        this(title, author, 0);
+    public Dvd(String author, String title) {
+        this(author, title, 0);
     }
 
-    public Dvd(String title, String author, int zone) {
-        super(title, author);
+    public Dvd(String author, String title, int zone) {
+        super(author, title);
         this.zone = zone;
     }
 

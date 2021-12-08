@@ -8,14 +8,15 @@ public class Media {
     protected String author;
     protected List<Integer> notes = new ArrayList<>();
 
-    public Media(String title, String author) {
-        this.title = title;
+    public Media(String author, String title) {
         this.author = author;
+        this.title = title;
     }
 
     public String getTitle() {
         return title;
     }
+
     public String getAuthor() {
         return author;
     }
