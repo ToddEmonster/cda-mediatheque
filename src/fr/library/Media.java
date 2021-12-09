@@ -28,7 +28,8 @@ public class Media {
             return this.notes
                     .stream()
                     .mapToInt(Integer::intValue)
-                    .sum();
+                    .sum()
+                    / this.notes.size();
         }
     }
 
